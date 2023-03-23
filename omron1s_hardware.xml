@@ -1,0 +1,9 @@
+<library path="omron1s_hwi">
+  <class name="omron1s_hardware/Omron1SHardware"
+         type="omron1s_hardware::Omron1SHardware"
+         base_class_type="hardware_interface::SystemInterface">
+    <description>
+      Omron 1S hardware interface plugin for ros2_control
+    </description>
+  </class>
+</library>
