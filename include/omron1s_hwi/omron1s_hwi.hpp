@@ -10,9 +10,13 @@
 #include <hardware_interface/system_interface.hpp>
 #include <rclcpp_lifecycle/state.hpp>
 
+#include <string.h>
+#include <inttypes.h>
 #include "ethercat.h"
 
 #define EC_TIMEOUTMON 500
+#define ENCODER_RESOLUTION 8388608
+#define PI 3.14159265359
 
 using hardware_interface::return_type;
 
@@ -88,17 +92,13 @@ namespace omron1s_hardware
     return_type write() override;
 
   private:
-    return_type enable_torque(const bool enabled);
-    return_type set_control_mode(const ControlMode &mode,
-                                 const bool force_set = false);
     return_type reset_command();
 
-    std::map<const char *const, const ControlItem *> control_items_;
     std::vector<Joint> joints_;
     std::vector<uint8_t> joint_ids_;
     bool torque_enabled_{false};
-    ControlMode control_mode_{ControlMode::Position};
     bool use_dummy_{false};
+
 
     char IOmap[80];
     OSAL_THREAD_HANDLE thread1;
@@ -109,8 +109,8 @@ namespace omron1s_hardware
     uint8 currentgroup;
     output_R88Dt *output_R88D;
     input_R88Dt *input_R88D;
-    int R88Dsetup(uint16 slave);
-    OSAL_THREAD_FUNC ecatcheck(void *ptr);
+    // int R88Dsetup(uint16 slave);
+    // OSAL_THREAD_FUNC ecatcheck(void *ptr);
   };
 } // namespace omron1s_hardware
 
