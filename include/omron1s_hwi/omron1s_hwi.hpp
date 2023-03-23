@@ -12,7 +12,7 @@
 
 #include <string.h>
 #include <inttypes.h>
-#include "ethercat.h"
+#include "soem/ethercat.h"
 
 #define EC_TIMEOUTMON 500
 #define ENCODER_RESOLUTION 8388608

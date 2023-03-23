@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
 project(omron1s_hwi)
-include_directories(include /usr/local/include/soem)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)
@@ -21,7 +20,7 @@ find_package(ament_cmake REQUIRED)
 find_package(rclcpp REQUIRED)
 find_package(hardware_interface REQUIRED)
 find_package(pluginlib REQUIRED)
-#find_package(soem REQUIRED)
+find_package(soem REQUIRED)
 
 add_library(
   ${PROJECT_NAME}
@@ -38,7 +37,7 @@ ament_target_dependencies(
   rclcpp
   hardware_interface
   pluginlib
-  #soem
+  soem
   )
 
 pluginlib_export_plugin_description_file(hardware_interface omron1s_hardware.xml)
@@ -83,7 +82,7 @@ ament_export_dependencies(
   rclcpp
   hardware_interface
   pluginlib
-  #soem
+  soem
 )
 
 ament_package()
