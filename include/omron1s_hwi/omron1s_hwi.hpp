@@ -3,16 +3,18 @@
 
 #include <map>
 #include <vector>
+#include <string.h>
+#include <inttypes.h>
 
-#include "rclcpp/macros.hpp"
+#include <hardware_interface/base_interface.hpp>
 #include <hardware_interface/handle.hpp>
 #include <hardware_interface/hardware_info.hpp>
 #include <hardware_interface/system_interface.hpp>
-#include <rclcpp_lifecycle/state.hpp>
+#include <hardware_interface/types/hardware_interface_return_values.hpp>
+#include <hardware_interface/types/hardware_interface_status_values.hpp>
+#include "rclcpp/macros.hpp"
 
-#include <string.h>
-#include <inttypes.h>
-#include "soem/ethercat.h"
+#include <soem/ethercat.h>
 
 #define EC_TIMEOUTMON 500
 #define ENCODER_RESOLUTION 8388608
@@ -68,24 +70,20 @@ namespace omron1s_hardware
     uint32 digital_inputs;
   } input_R88Dt;
 
-  class Omron1SHardware : public hardware_interface::SystemInterface
+  class Omron1SHardware : public hardware_interface::BaseInterface<hardware_interface::SystemInterface>
   {
   public:
     RCLCPP_SHARED_PTR_DEFINITIONS(Omron1SHardware)
 
-    CallbackReturn on_init(const hardware_interface::HardwareInfo &info) override;
+    return_type configure(const hardware_interface::HardwareInfo & info) override;
 
-    std::vector<hardware_interface::StateInterface>
-    export_state_interfaces() override;
+    std::vector<hardware_interface::StateInterface> export_state_interfaces() override;
 
-    std::vector<hardware_interface::CommandInterface>
-    export_command_interfaces() override;
+    std::vector<hardware_interface::CommandInterface> export_command_interfaces() override;
 
-    CallbackReturn
-    on_activate(const rclcpp_lifecycle::State &previous_state) override;
+    return_type start() override;
 
-    CallbackReturn
-    on_deactivate(const rclcpp_lifecycle::State &previous_state) override;
+    return_type stop() override;
 
     return_type read() override;
 
@@ -99,9 +97,8 @@ namespace omron1s_hardware
     bool torque_enabled_{false};
     bool use_dummy_{false};
 
-
     char IOmap[80];
-    OSAL_THREAD_HANDLE thread1;
+    // OSAL_THREAD_HANDLE thread1;
     int expectedWKC;
     boolean needlf;
     volatile int wkc;

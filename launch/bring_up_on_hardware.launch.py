@@ -34,28 +34,31 @@ def generate_launch_description():
                 "stdout": "screen",
                 "stderr": "screen",
             },
+            # prefix=["ethercat_grant"],
+            # shell=True,
+            
         ),
 
         Node(
             package="controller_manager",
-            executable="spawner",
+            executable="spawner.py",
             arguments=["joint_state_broadcaster",
                        "--controller-manager", "/controller_manager"],
         ),
 
         Node(
             package="controller_manager",
-            executable="spawner",
-            arguments=["forward_position_controller",
+            executable="spawner.py",
+            arguments=["position_trajectory_controller",
                        "-c", "/controller_manager"],
         ),
 
-        Node(
-            package="controller_manager",
-            executable="spawner",
-            arguments=["joint_trajectory_controller",
-                       "-c", "/controller_manager"],
-        ),
+        # Node(
+        #     package="controller_manager",
+        #     executable="spawner.py",
+        #     arguments=["forward_position_controller",
+        #                "-c", "/controller_manager"],
+        # ),
 
         Node(
             package="robot_state_publisher",

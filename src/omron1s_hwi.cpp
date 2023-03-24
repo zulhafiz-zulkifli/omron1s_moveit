@@ -39,15 +39,12 @@ namespace omron1s_hardware
     return 1;
   }
 
-
-  CallbackReturn
-  Omron1SHardware::on_init(const hardware_interface::HardwareInfo &info)
+  return_type Omron1SHardware::configure(const hardware_interface::HardwareInfo &info)
   {
     RCLCPP_DEBUG(rclcpp::get_logger("Omron1SHardware"), "configure");
-    if (hardware_interface::SystemInterface::on_init(info) !=
-        CallbackReturn::SUCCESS)
+    if (configure_default(info) != return_type::OK)
     {
-      return CallbackReturn::ERROR;
+      return return_type::ERROR;
     }
 
     joints_.resize(info_.joints.size(), Joint());
@@ -72,7 +69,8 @@ namespace omron1s_hardware
     {
       use_dummy_ = true;
       RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"), "dummy mode");
-      return CallbackReturn::SUCCESS;
+      status_ = hardware_interface::status::CONFIGURED;
+      return return_type::OK;
     }
 
     RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"), "SOEM (Simple Open EtherCAT Master)");
@@ -130,13 +128,14 @@ namespace omron1s_hardware
           if (ec_slave[0].state == EC_STATE_OPERATIONAL)
           {
             RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"), "Operational state reached for all slaves.");
-            return CallbackReturn::SUCCESS;
+            status_ = hardware_interface::status::CONFIGURED;
+            return return_type::OK;
           }
           else
           {
             RCLCPP_FATAL(rclcpp::get_logger("Omron1SHardware"), "Not all slaves reached operational state.");
             ec_close();
-            return CallbackReturn::ERROR;
+            return return_type::ERROR;
 
             // printf("Not all slaves reached operational state.\n");
             // ec_readstate();
@@ -158,27 +157,26 @@ namespace omron1s_hardware
         {
           RCLCPP_FATAL(rclcpp::get_logger("Omron1SHardware"), "More or less than %lu slaves found!", info_.joints.size());
           ec_close();
-          return CallbackReturn::ERROR;
+          return return_type::ERROR;
         }
       }
       else
       {
         RCLCPP_FATAL(rclcpp::get_logger("Omron1SHardware"), "No slaves found!");
         ec_close();
-        return CallbackReturn::ERROR;
+        return return_type::ERROR;
       }
     }
     else
     {
       RCLCPP_FATAL(rclcpp::get_logger("Omron1SHardware"), "No socket connection on %s", interface_name.c_str());
-      return CallbackReturn::ERROR;
+      return return_type::ERROR;
     }
 
     /////////////////////////////////////////////////////////////////////////////////////////
   }
 
-  std::vector<hardware_interface::StateInterface>
-  Omron1SHardware::export_state_interfaces()
+  std::vector<hardware_interface::StateInterface> Omron1SHardware::export_state_interfaces()
   {
     RCLCPP_DEBUG(rclcpp::get_logger("Omron1SHardware"),
                  "export_state_interfaces");
@@ -199,8 +197,7 @@ namespace omron1s_hardware
     return state_interfaces;
   }
 
-  std::vector<hardware_interface::CommandInterface>
-  Omron1SHardware::export_command_interfaces()
+  std::vector<hardware_interface::CommandInterface> Omron1SHardware::export_command_interfaces()
   {
     RCLCPP_DEBUG(rclcpp::get_logger("Omron1SHardware"),
                  "export_command_interfaces");
@@ -218,8 +215,7 @@ namespace omron1s_hardware
     return command_interfaces;
   }
 
-  CallbackReturn
-  Omron1SHardware::on_activate(const rclcpp_lifecycle::State &previous_state)
+  return_type Omron1SHardware::start()
   {
     RCLCPP_DEBUG(rclcpp::get_logger("Omron1SHardware"), "activate");
     for (uint i = 0; i < joints_.size(); i++)
@@ -236,23 +232,24 @@ namespace omron1s_hardware
     read();
     reset_command();
     write();
-    return CallbackReturn::SUCCESS;
+    status_ = hardware_interface::status::STARTED;
+    return return_type::OK;
   }
 
-  CallbackReturn Omron1SHardware::on_deactivate(
-      const rclcpp_lifecycle::State &previous_state)
+  return_type Omron1SHardware::stop()
   {
     inOP = FALSE;
     torque_enabled_ = false;
     RCLCPP_DEBUG(rclcpp::get_logger("Omron1SHardware"), "deactivate");
-    return CallbackReturn::SUCCESS;
+    status_ = hardware_interface::status::STOPPED;
+    return return_type::OK;
   }
 
   return_type Omron1SHardware::read()
   {
     if (use_dummy_)
     {
-      RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"), "read");
+      // RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"), "read");
       return return_type::OK;
     }
 
@@ -272,7 +269,7 @@ namespace omron1s_hardware
   {
     if (use_dummy_)
     {
-      RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"), "write");
+      // RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"), "write");
       for (auto &joint : joints_)
       {
         joint.state.position = joint.command.position;
@@ -284,35 +281,56 @@ namespace omron1s_hardware
     {
       output_R88D = (output_R88Dt *)ec_slave[s].outputs;
 
-      if (torque_enabled_)
+      // if (torque_enabled_)
+      // {
+      //   if (output_R88D->controlword == 0)
+      //   {
+      //     output_R88D->controlword = 6;
+      //   }
+      //   else if (output_R88D->controlword == 6)
+      //   {
+      //     output_R88D->controlword = 7;
+      //   }
+      //   else if (output_R88D->controlword == 7)
+      //   {
+      //     output_R88D->controlword = 15;
+      //   }
+      // }
+      // else
+      // {
+      //   if (output_R88D->controlword == 15)
+      //   {
+      //     output_R88D->controlword = 7;
+      //   }
+      //   else if (output_R88D->controlword == 7)
+      //   {
+      //     output_R88D->controlword = 6;
+      //   }
+      //   else if (output_R88D->controlword == 6)
+      //   {
+      //     output_R88D->controlword = 0;
+      //   }
+      // }
+      
+      if (output_R88D->controlword == 0)
       {
-        if (output_R88D->controlword == 0)
-        {
-          output_R88D->controlword = 6;
-        }
-        else if (output_R88D->controlword == 6)
-        {
-          output_R88D->controlword = 7;
-        }
-        else if (output_R88D->controlword == 7)
-        {
-          output_R88D->controlword = 15;
-        }
+        output_R88D->controlword = 6;
+        RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"),"Slave %d controlword set to 6", s);
       }
-      else
+      else if (output_R88D->controlword == 6)
       {
-        if (output_R88D->controlword == 15)
-        {
-          output_R88D->controlword = 7;
-        }
-        else if (output_R88D->controlword == 7)
-        {
-          output_R88D->controlword = 6;
-        }
-        else if (output_R88D->controlword == 6)
-        {
-          output_R88D->controlword = 0;
-        }
+        output_R88D->controlword = 7;
+        RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"),"Slave %d controlword set to 7", s);
+      }
+      else if (output_R88D->controlword == 7)
+      {
+        output_R88D->controlword = 15;
+        RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"),"Slave %d torque on", s);
+      }
+      else if (output_R88D->controlword != 15)
+      {
+        output_R88D->controlword = 0;
+        // RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"),"Slave %d controlword is %d", s, output_R88D->controlword);
       }
 
       output_R88D->target_position = int(joints_[s - 1].command.position * ENCODER_RESOLUTION / (2 * PI));
@@ -341,7 +359,6 @@ namespace omron1s_hardware
     return return_type::OK;
   }
 
-  
   // OSAL_THREAD_FUNC Omron1SHardware::ecatcheck(void *ptr)
   // {
   //   int slave;
