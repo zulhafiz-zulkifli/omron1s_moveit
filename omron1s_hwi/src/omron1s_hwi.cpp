@@ -311,8 +311,12 @@ namespace omron1s_hardware
       //     output_R88D->controlword = 0;
       //   }
       // }
-      
-      if (output_R88D->controlword == 0)
+      if (output_R88D->controlword == 31)
+      {
+        output_R88D->controlword = 0;
+        RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"),"Slave %d controlword set to 0", s);
+      }
+      else if (output_R88D->controlword == 0)
       {
         output_R88D->controlword = 6;
         RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"),"Slave %d controlword set to 6", s);
@@ -329,7 +333,7 @@ namespace omron1s_hardware
       }
       else if (output_R88D->controlword != 15)
       {
-        output_R88D->controlword = 0;
+        output_R88D->controlword = 31;
         // RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"),"Slave %d controlword is %d", s, output_R88D->controlword);
       }
 
