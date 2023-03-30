@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 <!-- Revolute-Revolute Manipulator -->
-<robot name="rrbot" xmlns:xacro="http://www.ros.org/wiki/xacro">
+<robot name="omron1s" xmlns:xacro="http://www.ros.org/wiki/xacro">
 
   <!-- Constants for robot dimensions -->
   <xacro:property name="PI" value="3.1415926535897931"/>
@@ -20,9 +20,9 @@
   <xacro:property name="axel_offset" value="0.05"/>
 
   <!-- Import all Gazebo-customization elements, including Gazebo colors -->
-  <xacro:include filename="$(find rrbot_unit4)/urdf/rrbot.gazebo"/>
+  <xacro:include filename="$(find omron1s_urdf)/urdf/omron1s.gazebo"/>
   <!-- Import Rviz colors -->
-  <xacro:include filename="$(find rrbot_unit4)/urdf/materials.xacro"/>
+  <xacro:include filename="$(find omron1s_urdf)/urdf/materials.xacro"/>
 
   <!-- Used for fixing robot to Gazebo 'base_link' -->
   <link name="world"/>

@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>rrbot_unit4</name>
+  <name>omron1s_urdf</name>
   <version>0.0.0</version>
-  <description>Package with URDF and description files of a RRBOT.</description>
+  <description>Package with URDF and description files of Omron 1S Drives.</description>
   <maintainer email="user@todo.todo">user</maintainer>
   <license>TODO: License declaration</license>
 

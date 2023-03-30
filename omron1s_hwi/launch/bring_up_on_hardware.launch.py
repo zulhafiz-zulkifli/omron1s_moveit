@@ -7,12 +7,12 @@ import xacro
 
 def generate_launch_description():
 
-    robot_name = "rrbot"
-    robot_model_file = "rrbot.xacro"
-    package_name = "rrbot_unit4"
+    robot_name = "omron1s"
+    robot_model_file = "omron1s.xacro"
+    package_name = "omron1s_urdf"
 
     rviz_config = os.path.join(get_package_share_directory(
-        "rrbot_unit4"), "rviz", "unit4.rviz")
+        package_name), "rviz", "omron1s.rviz")
 
     robot_description = os.path.join(get_package_share_directory(
         package_name), "urdf", robot_model_file)
