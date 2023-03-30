@@ -68,15 +68,15 @@ def generate_launch_description():
                 {"robot_description": robot_description_config.toxml()}],
             output="screen"),
 
-        Node(
-            package="rviz2",
-            executable="rviz2",
-            name="rviz2",
-            arguments=["-d", rviz_config],
-            output={
-                "stdout": "screen",
-                "stderr": "log",
-            },
-        )
+        # Node(
+        #     package="rviz2",
+        #     executable="rviz2",
+        #     name="rviz2",
+        #     arguments=["-d", rviz_config],
+        #     output={
+        #         "stdout": "screen",
+        #         "stderr": "log",
+        #     },
+        # )
 
     ])
