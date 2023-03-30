@@ -49,7 +49,7 @@ def generate_launch_description():
         # Node(
         #     package="controller_manager",
         #     executable="spawner.py",
-        #     arguments=["position_trajectory_controller",
+        #     arguments=["omron1s_manipulator_controller",
         #                "-c", "/controller_manager"],
         # ),
 

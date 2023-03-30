@@ -56,7 +56,8 @@
     </inertial>
   </link>
 
-  <joint name="joint1" type="continuous">
+  <joint name="joint1" type="revolute">
+    <limit lower="-6.28" upper="6.28" effort="100" velocity="6.28"/>
     <parent link="link1"/>
     <child link="link2"/>
     <origin xyz="0 ${width} ${height1 - axel_offset}" rpy="0 0 0"/>
@@ -88,7 +89,8 @@
     </inertial>
   </link>
 
-  <joint name="joint2" type="continuous">
+  <joint name="joint2" type="revolute">
+    <limit lower="-6.28" upper="6.28" effort="100" velocity="6.28"/>
     <parent link="link2"/>
     <child link="link3"/>
     <origin xyz="0 ${width} ${height2 - axel_offset*2}" rpy="0 0 0"/>
