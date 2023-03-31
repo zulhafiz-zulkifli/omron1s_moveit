@@ -92,7 +92,8 @@ namespace omron1s_hardware
       if (ec_config_init(FALSE) > 0)
       {
         RCLCPP_INFO(rclcpp::get_logger("Omron1SHardware"), "%d slaves found and configured.\n", ec_slavecount);
-        if (ec_slavecount == info_.joints.size())
+        // if (ec_slavecount == info_.joints.size())
+        if(1)
         {
           for (int i = 1; i <= ec_slavecount; i++)
           {

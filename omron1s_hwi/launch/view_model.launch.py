@@ -9,7 +9,7 @@ def generate_launch_description():
 
     # robot_name = "omron1s"
     # robot_model_file = "omron1s.xacro"
-    package_name = "omron1s_urdf"
+    package_name = "omron1s_description"
 
     rviz_config = os.path.join(get_package_share_directory(
         package_name), "rviz", "omron1s.rviz")

@@ -4,6 +4,8 @@ controller_list:
     joints:
       - joint1
       - joint2
+      - joint3
+      - joint4
 initial:  # Define initial robot poses.
   - group: omron1s_manipulator
     pose: home

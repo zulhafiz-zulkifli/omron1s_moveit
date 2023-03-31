@@ -1,19 +1,17 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>omron1s_hwi</name>
+  <name>omron1s_description</name>
   <version>0.0.0</version>
-  <description>Omron 1S drives hardware interface</description>
-  <maintainer email="zulh2605@gmail.com">user</maintainer>
+  <description>Package with URDF and description files of Omron 1S Drives.</description>
+  <maintainer email="user@todo.todo">user</maintainer>
   <license>TODO: License declaration</license>
 
   <buildtool_depend>ament_cmake</buildtool_depend>
 
-  <depend>rclcpp</depend>
-  <depend>pluginlib</depend>
-  <depend>hardware_interface</depend>
-  <depend>soem</depend>
-  <depend>omron1s_description</depend>
+  <depend>urdf</depend>
+  <depend>xacro</depend>
+  <depend>robot_state_publisher</depend>
 
   <test_depend>ament_lint_auto</test_depend>
   <test_depend>ament_lint_common</test_depend>

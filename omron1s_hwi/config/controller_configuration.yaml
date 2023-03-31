@@ -20,6 +20,8 @@ forward_position_controller:
     joints:
       - joint1
       - joint2
+      - joint3
+      - joint4
     interface_name: position
 
 
@@ -28,6 +30,8 @@ position_trajectory_controller:
     joints:
       - joint1
       - joint2
+      - joint3
+      - joint4
 
     command_interfaces:
       - position
