@@ -1,7 +1,7 @@
 controller_names:
-  - position_trajectory_controller
+  - omron1s_manipulator_controller
 
-position_trajectory_controller:
+omron1s_manipulator_controller:
   action_ns: follow_joint_trajectory
   type: FollowJointTrajectory
   default: true

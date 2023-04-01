@@ -6,6 +6,10 @@ controller_list:
       - joint2
       - joint3
       - joint4
+  # - name: fake_omron1s_gripper_controller
+  #   type: $(arg execution_type)
+  #   joints:
+  #     - joint4
 initial:  # Define initial robot poses.
   - group: omron1s_manipulator
     pose: home

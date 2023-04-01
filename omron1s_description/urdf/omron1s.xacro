@@ -213,7 +213,7 @@
   </link>
   <joint
     name="joint3"
-    type="fixed">
+    type="revolute">
     <origin
       xyz="0 0 0.55"
       rpy="1.75653072975658 0 0" />
@@ -271,7 +271,7 @@
   </link>
   <joint
     name="joint4"
-    type="fixed">
+    type="revolute">
     <origin
       xyz="0 0 0.55"
       rpy="0.535953139821402 0 -3.14159265358979" />
