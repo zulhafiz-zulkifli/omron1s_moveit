@@ -293,48 +293,22 @@
 
   </joint>
 
-    <!-- ROS2 CONTROL REAL -->
-    <!-- <ros2_control name="Omron1SHardware" type="system">
-    
-      <hardware>
+
+    <!-- ROS2 CONTROL-->
+    <ros2_control name="Omron1SControl" type="system">
+
+      <!-- <hardware>
         <plugin>omron1s_hardware/Omron1SHardware</plugin>
         <param name="interface_name">enp2s0</param>
         <param name="use_dummy">false</param>
-      </hardware>
-    
-      <joint name="joint1">
-        <param name="id">1</param>
-        <command_interface name="position"/>
-        <state_interface name="position"/>
-      </joint>
+      </hardware> -->
 
-      <joint name="joint2">
-        <param name="id">2</param>
-        <command_interface name="position"/>
-        <state_interface name="position"/>
-      </joint>
-
-      <joint name="joint3">
-        <param name="id">3</param>
-        <command_interface name="position"/>
-        <state_interface name="position"/>
-      </joint>
-
-      <joint name="joint4">
-        <param name="id">4</param>
-        <command_interface name="position"/>
-        <state_interface name="position"/>
-      </joint>
-    
-    </ros2_control> -->
-
-    <!-- ROS2 CONTROL SIMULATION -->
-    <ros2_control name="GazeboSystem" type="system">
 			<hardware>
 				<plugin>gazebo_ros2_control/GazeboSystem</plugin>
 	    </hardware>
 
 	    	<joint name="joint1">
+          <param name="id">1</param>
 	    		<command_interface name="position">
 	    			<param name="min">-3.14</param>
 	    			<param name="max">3.14</param>
@@ -345,6 +319,7 @@
 	    	</joint>
 
 	    	<joint name="joint2">
+          <param name="id">2</param>
 	    		<command_interface name="position">
 	    			<param name="min">-3.14</param>
 	    			<param name="max">3.14</param>
@@ -355,6 +330,7 @@
 	    	</joint>
 
 	    	<joint name="joint3">
+          <param name="id">3</param>
 	    		<command_interface name="position">
 	    			<param name="min">-3.14</param>
 	    			<param name="max">3.14</param>
@@ -365,6 +341,7 @@
 	    	</joint>
 
 	    	<joint name="joint4">
+          <param name="id">4</param>
 	    		<command_interface name="position">
 	    			<param name="min">-3.14</param>
 	    			<param name="max">3.14</param>

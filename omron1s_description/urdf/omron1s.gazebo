@@ -25,7 +25,7 @@
     <mu2>30.0</mu2>
     <maxVel>1.0</maxVel>
     <minDepth>0.001</minDepth>
-    <material>Gazebo/Black</material>
+    <material>Gazebo/Orange</material>
   </gazebo>
 
   <!-- Link3 -->
@@ -36,7 +36,7 @@
     <mu2>30.0</mu2>
     <maxVel>1.0</maxVel>
     <minDepth>0.001</minDepth>
-    <material>Gazebo/Orange</material>
+    <material>Gazebo/Black</material>
   </gazebo>
 
   <!-- Link4 -->
@@ -47,7 +47,7 @@
     <mu2>30.0</mu2>
     <maxVel>1.0</maxVel>
     <minDepth>0.001</minDepth>
-    <material>Gazebo/Black</material>
+    <material>Gazebo/Orange</material>
   </gazebo>
 
 
