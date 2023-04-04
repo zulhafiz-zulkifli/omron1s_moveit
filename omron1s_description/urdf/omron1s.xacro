@@ -37,7 +37,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/base_link.STL" />
+          filename="file:///$(find omron1s_description)/meshes/base_link.STL" />
       </geometry>
       <material
         name="">
@@ -51,7 +51,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/base_link.STL" />
+          filename="file:///$(find omron1s_description)/meshes/base_link.STL" />
       </geometry>
     </collision>
   </link>
@@ -77,7 +77,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/link1.STL" />
+          filename="file:///$(find omron1s_description)/meshes/link1.STL" />
       </geometry>
       <material
         name="">
@@ -91,7 +91,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/link1.STL" />
+          filename="file:///$(find omron1s_description)/meshes/link1.STL" />
       </geometry>
     </collision>
   </link>
@@ -110,8 +110,9 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="100"
+      effort="500"
       velocity="6.28" />
+    <dynamics damping="60.0" friction="4.0" />
   </joint>
   <link
     name="link2">
@@ -135,7 +136,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/link2.STL" />
+          filename="file:///$(find omron1s_description)/meshes/link2.STL" />
       </geometry>
       <material
         name="">
@@ -149,7 +150,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/link2.STL" />
+          filename="file:///$(find omron1s_description)/meshes/link2.STL" />
       </geometry>
     </collision>
   </link>
@@ -168,8 +169,9 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="100"
+      effort="500"
       velocity="6.28" />
+    <dynamics damping="60.0" friction="4.0" />
   </joint>
   <link
     name="link3">
@@ -193,7 +195,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/link3.STL" />
+          filename="file:///$(find omron1s_description)/meshes/link3.STL" />
       </geometry>
       <material
         name="">
@@ -207,7 +209,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/link3.STL" />
+          filename="file:///$(find omron1s_description)/meshes/link3.STL" />
       </geometry>
     </collision>
   </link>
@@ -226,8 +228,9 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="100"
+      effort="500"
       velocity="6.28" />
+    <dynamics damping="60.0" friction="4.0" />
   </joint>
   <link
     name="link4">
@@ -251,7 +254,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/link4.STL" />
+          filename="file:///$(find omron1s_description)/meshes/link4.STL" />
       </geometry>
       <material
         name="">
@@ -265,7 +268,7 @@
         rpy="0 0 0" />
       <geometry>
         <mesh
-          filename="package://omron1s_description/meshes/link4.STL" />
+          filename="file:///$(find omron1s_description)/meshes/link4.STL" />
       </geometry>
     </collision>
   </link>
@@ -284,11 +287,14 @@
     <limit
       lower="-3.14"
       upper="3.14"
-      effort="100"
+      effort="500"
       velocity="6.28" />
+    <dynamics damping="60.0" friction="4.0" />
+
   </joint>
 
-    <ros2_control name="Omron1SHardware" type="system">
+    <!-- ROS2 CONTROL REAL -->
+    <!-- <ros2_control name="Omron1SHardware" type="system">
     
       <hardware>
         <plugin>omron1s_hardware/Omron1SHardware</plugin>
@@ -320,6 +326,109 @@
         <state_interface name="position"/>
       </joint>
     
-    </ros2_control>
+    </ros2_control> -->
+
+    <!-- ROS2 CONTROL SIMULATION -->
+    <ros2_control name="GazeboSystem" type="system">
+			<hardware>
+				<plugin>gazebo_ros2_control/GazeboSystem</plugin>
+	    </hardware>
+
+	    	<joint name="joint1">
+	    		<command_interface name="position">
+	    			<param name="min">-3.14</param>
+	    			<param name="max">3.14</param>
+	    		</command_interface>
+	    		<state_interface name="position"/>
+	    		<state_interface name="velocity"/>
+	    		<state_interface name="effort"/>
+	    	</joint>
+
+	    	<joint name="joint2">
+	    		<command_interface name="position">
+	    			<param name="min">-3.14</param>
+	    			<param name="max">3.14</param>
+	    		</command_interface>
+	    		<state_interface name="position"/>
+	    		<state_interface name="velocity"/>
+	    		<state_interface name="effort"/>
+	    	</joint>
+
+	    	<joint name="joint3">
+	    		<command_interface name="position">
+	    			<param name="min">-3.14</param>
+	    			<param name="max">3.14</param>
+	    		</command_interface>
+	    		<state_interface name="position"/>
+	    		<state_interface name="velocity"/>
+	    		<state_interface name="effort"/>
+	    	</joint>
+
+	    	<joint name="joint4">
+	    		<command_interface name="position">
+	    			<param name="min">-3.14</param>
+	    			<param name="max">3.14</param>
+	    		</command_interface>
+	    		<state_interface name="position"/>
+	    		<state_interface name="velocity"/>
+	    		<state_interface name="effort"/>
+	    	</joint>
+
+	  	</ros2_control>
+
+		<gazebo>
+			<plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
+        		<!--<robot_sim_type>gazebo_ros2_control/DefaultRobotHWSim</robot_sim_type> -->
+				<!-- <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type> -->
+				<parameters>$(find omron1s_hwi)/config/controller_configuration.yaml</parameters>
+		  </plugin>
+		</gazebo>
+
+
+    <!-- TRANSMISSION -->
+    <!-- Transmission 1 -->
+		<transmission name="tran1">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="joint1">
+				<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="motor1">
+				<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+		</transmission>
+		<!-- Transmission 2 -->
+		<transmission name="tran2">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="joint2">
+				<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="motor2">
+				<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+		</transmission>
+		<!-- Transmission 3 -->
+		<transmission name="tran3">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="joint3">
+				<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="motor3">
+				<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+		</transmission>
+		<!-- Transmission 4 -->
+		<transmission name="tran4">
+			<type>transmission_interface/SimpleTransmission</type>
+			<joint name="joint4">
+				<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+			</joint>
+			<actuator name="motor4">
+				<hardwareInterface>hardware_interface/PositionJointInterface</hardwareInterface>
+				<mechanicalReduction>1</mechanicalReduction>
+			</actuator>
+		</transmission>
 
 </robot>
