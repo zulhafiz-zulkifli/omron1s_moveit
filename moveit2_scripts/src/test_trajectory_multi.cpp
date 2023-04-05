@@ -48,16 +48,16 @@ public:
                                                this->joint_group_positions_arm);
   }
 
-  void plan_arm_joint_space() {
+  void go_position1() {
 
     RCLCPP_INFO(LOGGER, "Planning to Joint Space");
 
-    //joint_group_positions_arm[0] = 0.00;  // Shoulder Pan
-    joint_group_positions_arm[0] = -2.50;  // Shoulder Lift
-    joint_group_positions_arm[1] = 1.50;  // Elbow
-    joint_group_positions_arm[2] = -1.50;  // Wrist 1
-    joint_group_positions_arm[3] = -1.55;  // Wrist 2
-    //joint_group_positions_arm[5] = 0.00;  // Wrist 3
+    joint_group_positions_arm[0] = 0.00;  // Shoulder Pan
+    joint_group_positions_arm[1] = 1.145;  // Shoulder Lift
+    joint_group_positions_arm[2] = -1.145;  // Elbow
+    joint_group_positions_arm[3] = 0.00;  // Wrist 1
+    //joint_group_positions_arm[4] = 0.00;  // Wrist 2
+    //#joint_group_positions_arm[5] = 0.00;  // Wrist 3
 
     move_group_arm.setJointValueTarget(joint_group_positions_arm);
 
@@ -65,10 +65,42 @@ public:
                         moveit::planning_interface::MoveItErrorCode::SUCCESS);
 
     // Execute
-    if(success_arm){
-      move_group_arm.execute(my_plan_arm);
-    }
-    
+    move_group_arm.execute(my_plan_arm);
+  }
+
+  void go_position2() {
+
+    RCLCPP_INFO(LOGGER, "Planning to Joint Space");
+
+    joint_group_positions_arm[0] = 3.14;  // Shoulder Pan
+    joint_group_positions_arm[1] = 1.145;  // Shoulder Lift
+    joint_group_positions_arm[2] = -1.145;  // Elbow
+    joint_group_positions_arm[3] = 0.00;  // Wrist 1
+    //joint_group_positions_arm[4] = 0.00;  // Wrist 2
+    //joint_group_positions_arm[5] = 1.57;  // Wrist 3
+
+    move_group_arm.setJointValueTarget(joint_group_positions_arm);
+
+    bool success_arm = (move_group_arm.move() ==
+                        moveit::planning_interface::MoveItErrorCode::SUCCESS);
+
+  }
+
+    void go_position3() {
+
+    RCLCPP_INFO(LOGGER, "Planning to Joint Space");
+
+    joint_group_positions_arm[0] = 0.00;  // Shoulder Pan
+    joint_group_positions_arm[1] = 0.00;  // Shoulder Lift
+    joint_group_positions_arm[2] = 0.00;  // Elbow
+    joint_group_positions_arm[3] = 0.00;  // Wrist 1
+    //joint_group_positions_arm[4] = 0.00;  // Wrist 2
+    //joint_group_positions_arm[5] = 1.57;  // Wrist 3
+
+    move_group_arm.setJointValueTarget(joint_group_positions_arm);
+
+    bool success_arm = (move_group_arm.move() ==
+                        moveit::planning_interface::MoveItErrorCode::SUCCESS);
 
   }
 
@@ -78,7 +110,11 @@ public:
     this->timer_->cancel();
     get_info();
     current_state();
-    plan_arm_joint_space();
+    go_position1();
+    current_state();
+    go_position2();
+    current_state();
+    go_position3();
   }
 
 private:

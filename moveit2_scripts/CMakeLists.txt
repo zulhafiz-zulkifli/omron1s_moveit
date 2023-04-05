@@ -46,18 +46,34 @@ add_executable(test_trajectory
 target_include_directories(test_trajectory
     PUBLIC include)
 ament_target_dependencies(test_trajectory
-    ament_cmake
-	rclcpp
-	rclcpp_action
-	moveit_core
-	moveit_ros_planning_interface
-	interactive_markers
-	moveit_ros_planning
-	control_msgs)
+  ament_cmake
+  rclcpp
+  rclcpp_action
+  moveit_core
+  moveit_ros_planning_interface
+  interactive_markers
+  moveit_ros_planning
+  control_msgs)
+
+
+add_executable(test_trajectory_multi
+  src/test_trajectory_multi.cpp)
+target_include_directories(test_trajectory_multi
+  PUBLIC include)
+ament_target_dependencies(test_trajectory_multi
+  ament_cmake
+  rclcpp
+  rclcpp_action
+  moveit_core
+  moveit_ros_planning_interface
+  interactive_markers
+  moveit_ros_planning
+  control_msgs)
 
 # Install the executable
 install(TARGETS 
 	test_trajectory
+  test_trajectory_multi
     DESTINATION lib/${PROJECT_NAME}
 )
 
