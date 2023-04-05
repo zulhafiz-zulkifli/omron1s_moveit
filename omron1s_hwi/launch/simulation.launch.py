@@ -44,19 +44,23 @@ def generate_launch_description():
             
         # ),
 
-        Node(
-            package="controller_manager",
-            executable="spawner.py",
-            arguments=["joint_state_broadcaster",
-                       "--controller-manager", "/controller_manager"],
-        ),
+        # Node(
+        #     package="controller_manager",
+        #     executable="spawner.py",
+        #     arguments=["joint_state_broadcaster",
+        #                "-c", "/controller_manager"],
+        #     parameters=[
+        #         {"use_sim_time": True}],
+        # ),
 
-        Node(
-            package="controller_manager",
-            executable="spawner.py",
-            arguments=["omron1s_manipulator_controller",
-                       "-c", "/controller_manager"],
-        ),
+        # Node(
+        #     package="controller_manager",
+        #     executable="spawner.py",
+        #     arguments=["omron1s_manipulator_controller",
+        #                "-c", "/controller_manager"],
+        #     parameters=[
+        #         {"use_sim_time": True}],
+        # ),
 
         # Node(
         #     package="controller_manager",
@@ -65,23 +69,38 @@ def generate_launch_description():
         #                "-c", "/controller_manager"],
         # ),
 
+
+
         Node(
             package="robot_state_publisher",
             executable="robot_state_publisher",
             name="robot_state_publisher",
             parameters=[
                 {"robot_description": robot_description_config.toxml()}],
-            output="screen"),
+            output="screen"
+        ),
 
         Node(
             package='gazebo_ros',
             executable='spawn_entity.py',
             arguments=['-entity', 'omron1s', '-topic', 'robot_description'],
-            output='screen'),
+            output='screen',
+        ),
+            
 
         ExecuteProcess(
             cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so'], 
             output='screen'),
+
+        ExecuteProcess(
+            cmd=['ros2', 'control', 'load_controller', '--set-state', 'start','joint_state_broadcaster'],
+            output='screen'
+        ),
+
+        ExecuteProcess(
+            cmd=['ros2', 'control', 'load_controller', '--set-state', 'start','omron1s_manipulator_controller'],
+            output='screen'
+        ),
 
         # Node(
         #     package="rviz2",

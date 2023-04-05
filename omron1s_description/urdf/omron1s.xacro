@@ -417,6 +417,7 @@
     <plugin name="gazebo_ros2_control" filename="libgazebo_ros2_control.so">
           <!--<robot_sim_type>gazebo_ros2_control/DefaultRobotHWSim</robot_sim_type> -->
       <!-- <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type> -->
+      <robot_sim_type>gazebo_ros2_control/GazeboSystem</robot_sim_type>
       <parameters>$(find omron1s_hwi)/config/controller_configuration.yaml</parameters>
     </plugin>
   </gazebo>
