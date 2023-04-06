@@ -77,7 +77,7 @@ def generate_launch_description():
             name="robot_state_publisher",
             parameters=[
                 {"robot_description": robot_description_config.toxml()},
-                {"use_sim_time": True}
+                # {"use_sim_time": True}
                 ],
             output="screen"
         ),
@@ -87,6 +87,9 @@ def generate_launch_description():
             executable='spawn_entity.py',
             arguments=['-entity', 'omron1s', '-topic', 'robot_description'],
             output='screen',
+            parameters=[
+                # {"use_sim_time": True}
+                ]
         ),
             
 

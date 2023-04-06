@@ -1,6 +1,7 @@
 # Controller manager configuration
 controller_manager:
   ros__parameters:
+    # use_sim_time: true
     update_rate: 500  # Hz
 
     ### Controllers to be initialized at startup ###
