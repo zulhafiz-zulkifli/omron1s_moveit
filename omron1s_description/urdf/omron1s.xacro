@@ -353,6 +353,22 @@
       xyz="0 0 0" />
   </joint>
 
+  <link name="gripper_tip"/>
+  
+  <joint
+    name="gripper_tip_joint"
+    type="fixed">
+    <origin
+      xyz="0.0 0.0 0.0"
+      rpy="0 0 0" />
+    <parent
+      link="gripper" />
+    <child
+      link="gripper_tip" />
+    <axis
+      xyz="0 0 0" />
+  </joint>
+
 
   <!-- ROS2 CONTROL-->
   <ros2_control name="Omron1SControl" type="system">

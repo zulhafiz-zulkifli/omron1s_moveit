@@ -72,12 +72,10 @@ public:
 
     RCLCPP_INFO(LOGGER, "Planning to Joint Space");
 
-    joint_group_positions_arm[0] = 3.14;  // Shoulder Pan
-    joint_group_positions_arm[1] = 1.145;  // Shoulder Lift
-    joint_group_positions_arm[2] = -1.145;  // Elbow
-    joint_group_positions_arm[3] = 0.00;  // Wrist 1
-    //joint_group_positions_arm[4] = 0.00;  // Wrist 2
-    //joint_group_positions_arm[5] = 1.57;  // Wrist 3
+    joint_group_positions_arm[0] = 3.14;
+    joint_group_positions_arm[1] = 1.145;
+    joint_group_positions_arm[2] = -1.145;
+    joint_group_positions_arm[3] = 0.00;
 
     move_group_arm.setJointValueTarget(joint_group_positions_arm);
 
@@ -90,12 +88,10 @@ public:
 
     RCLCPP_INFO(LOGGER, "Planning to Joint Space");
 
-    joint_group_positions_arm[0] = 0.00;  // Shoulder Pan
-    joint_group_positions_arm[1] = 0.00;  // Shoulder Lift
-    joint_group_positions_arm[2] = 0.00;  // Elbow
-    joint_group_positions_arm[3] = 0.00;  // Wrist 1
-    //joint_group_positions_arm[4] = 0.00;  // Wrist 2
-    //joint_group_positions_arm[5] = 1.57;  // Wrist 3
+    joint_group_positions_arm[0] = 0.00;
+    joint_group_positions_arm[1] = 0.00;
+    joint_group_positions_arm[2] = 0.00;
+    joint_group_positions_arm[3] = 0.00;
 
     move_group_arm.setJointValueTarget(joint_group_positions_arm);
 

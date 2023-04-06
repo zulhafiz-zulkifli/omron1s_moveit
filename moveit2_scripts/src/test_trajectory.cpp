@@ -9,6 +9,7 @@
 
 #include "rclcpp/rclcpp.hpp"
 #include <string>
+#include <tf2/LinearMath/Quaternion.h>
 
 static const rclcpp::Logger LOGGER = rclcpp::get_logger("move_group_demo");
 static const std::string PLANNING_GROUP_ARM = "omron1s_manipulator";
@@ -21,6 +22,8 @@ public:
         joint_model_group_arm(
             move_group_arm.getCurrentState()->getJointModelGroup(
                 PLANNING_GROUP_ARM)) {
+    move_group_arm.startStateMonitor();
+    get_info();
 
     this->timer_ =
         this->create_wall_timer(std::chrono::milliseconds(500),
@@ -32,7 +35,11 @@ public:
   void get_info() {
 
     RCLCPP_INFO(LOGGER, "Planning frame: %s", move_group_arm.getPlanningFrame().c_str());
+    RCLCPP_INFO(LOGGER, "Pose reference frame: %s", move_group_arm.getPoseReferenceFrame().c_str());
     RCLCPP_INFO(LOGGER, "End-effector link: %s", move_group_arm.getEndEffectorLink().c_str());
+ 
+    
+    
     RCLCPP_INFO(LOGGER, "Available Planning Groups:");
     std::copy(move_group_arm.getJointModelGroupNames().begin(), move_group_arm.getJointModelGroupNames().end(),
                 std::ostream_iterator<std::string>(std::cout, ", "));
@@ -46,26 +53,121 @@ public:
 
     current_state_arm->copyJointGroupPositions(this->joint_model_group_arm,
                                                this->joint_group_positions_arm);
+
   }
 
-  void plan_arm_joint_space() {
 
-    RCLCPP_INFO(LOGGER, "Planning to Joint Space");
+  void plan_arm_joint_space1() {
 
-    //joint_group_positions_arm[0] = 0.00;  // Shoulder Pan
-    joint_group_positions_arm[0] = -2.50;  // Shoulder Lift
-    joint_group_positions_arm[1] = 1.50;  // Elbow
-    joint_group_positions_arm[2] = -1.50;  // Wrist 1
-    joint_group_positions_arm[3] = -1.55;  // Wrist 2
-    //joint_group_positions_arm[5] = 0.00;  // Wrist 3
+    // RCLCPP_INFO(LOGGER, "Planning to Joint Space");
+    // joint_group_positions_arm[0] = -2.50;
+    // joint_group_positions_arm[1] = 1.50;
+    // joint_group_positions_arm[2] = -1.50;
+    // joint_group_positions_arm[3] = -1.55;
+    // move_group_arm.setJointValueTarget(joint_group_positions_arm);
 
-    move_group_arm.setJointValueTarget(joint_group_positions_arm);
+    // tf2::Quaternion q;
+    // // Create a quaternion from roll/pitch/yaw in radians (0, 0, 0)
+    // // [ x: 1.5707963, y: 0.2381838, z: -3.1415927 ]
+    // q.setRPY(-1*1.57, 0.00, -3.14);
+    // // Print the quaternion components (0, 0, 0, 1)
+    // // RCLCPP_INFO(this->get_logger(), "%f %f %f %f", q.x(), q.y(), q.z(), q.w());
 
-    bool success_arm = (move_group_arm.plan(my_plan_arm) ==
+    // RCLCPP_INFO(LOGGER, "Planning to End-Effector Pose");
+    // target_pose.orientation.x = q.x();
+    // target_pose.orientation.y = q.y();
+    // target_pose.orientation.z = q.z();
+    // target_pose.orientation.w = q.w();
+    // target_pose.position.x = 0.0;
+    // target_pose.position.y = -0.5;
+    // target_pose.position.z = 0.5;
+
+    // move_group_arm.setApproximateJointValueTarget(target_pose,"link4");
+
+    // auto current_pose = move_group_arm.getCurrentPose();
+    // moveit_msgs::msg::OrientationConstraint orientation_constraint;
+    // orientation_constraint.header.frame_id = move_group_arm.getPoseReferenceFrame();
+    // orientation_constraint.link_name = move_group_arm.getEndEffectorLink();
+
+    // // Quaternion desired: -0.701115 -0.082895 0.082895 0.702886, 
+    // // quaternion actual: -0.083767 0.702151 -0.702106 0.083752, 
+    // // error: x=3.139817, y=0.002384, z=3.141434, 
+
+    // orientation_constraint.orientation.x = current_pose.pose.orientation.y;
+    // orientation_constraint.orientation.y = current_pose.pose.orientation.w;
+    // orientation_constraint.orientation.z = current_pose.pose.orientation.x;
+    // orientation_constraint.orientation.w = current_pose.pose.orientation.z;
+    // // orientation_constraint.orientation.x = -0.702000;
+    // // orientation_constraint.orientation.y = -0.083000;
+    // // orientation_constraint.orientation.z = 0.083000;
+    // // orientation_constraint.orientation.w = 0.702000;
+    
+
+
+    // orientation_constraint.absolute_x_axis_tolerance = 0.2;
+    // orientation_constraint.absolute_y_axis_tolerance = 3.141593;
+    // orientation_constraint.absolute_z_axis_tolerance = 3.141593;
+    // orientation_constraint.weight = 1.0;
+    
+    // moveit_msgs::msg::Constraints orientation_constraints;
+    // orientation_constraints.orientation_constraints.emplace_back(orientation_constraint);
+
+    // move_group_arm.setPathConstraints(orientation_constraints);
+
+    move_group_arm.setPositionTarget(0.000000, -0.500000, 0.600000, "link4");
+
+
+
+    bool plan_success = (move_group_arm.plan(my_plan_arm) ==
                         moveit::planning_interface::MoveItErrorCode::SUCCESS);
 
     // Execute
-    if(success_arm){
+    if(plan_success){
+      move_group_arm.execute(my_plan_arm);
+    }
+
+    move_group_arm.clearPoseTargets();
+    
+
+  }
+
+    void plan_arm_joint_space2() {
+
+    RCLCPP_INFO(LOGGER, "Planning to Joint Space");
+    // joint_group_positions_arm[4] = joint_group_positions_arm[4];
+    // move_group_arm.setJointValueTarget(joint_group_positions_arm);
+
+    std::vector< double> cur_joint_values = move_group_arm.getCurrentJointValues();
+    // for (double i: rpy){
+    //   RCLCPP_INFO(LOGGER, "%f", i);
+    // }
+    // cur_joint_values[3] = cur_joint_values[3]+0.785398;
+    move_group_arm.setJointValueTarget(cur_joint_values);
+
+    // RCLCPP_INFO(LOGGER, "Planning to End-Effector Pose");
+    // // target_pose.orientation.x = 0.084;
+    // // target_pose.orientation.y = -0.702;
+    // // target_pose.orientation.z = 0.702;
+    // // target_pose.orientation.w = -0.084;
+    // // target_pose.position.x = 0.0;
+    // // target_pose.position.y = 0.5;
+    // // target_pose.position.z = 0.5;
+    // // // move_group_arm.setPoseTarget(target_pose);
+    // // std::string i = "link4";
+    // // move_group_arm.setApproximateJointValueTarget(target_pose,i);
+
+    // // - Translation: [0.201, -0.418, 0.448]
+    // // - Rotation: in Quaternion [0.084, -0.702, 0.702, -0.084]
+
+    // move_group_arm.setPositionTarget(0.0, 0.5, 0.5, "link4");
+
+
+
+    bool plan_success = (move_group_arm.plan(my_plan_arm) ==
+                        moveit::planning_interface::MoveItErrorCode::SUCCESS);
+
+    // Execute
+    if(plan_success){
       move_group_arm.execute(my_plan_arm);
     }
     
@@ -75,15 +177,24 @@ public:
   // Timer Callback function
   void timer_callback() {
 
-    this->timer_->cancel();
-    get_info();
-    current_state();
-    plan_arm_joint_space();
+    // this->timer_->cancel();
+    
+    // current_state();
+    // plan_arm_joint_space1();
+    // current_state();
+    // plan_arm_joint_space2();
+
+    RCLCPP_INFO(LOGGER, "Current RPY:");
+    std::vector< double> rpy = move_group_arm.getCurrentRPY("link4");
+    for (double i: rpy){
+      RCLCPP_INFO(LOGGER, "%f", i);
+    }
   }
 
 private:
   moveit::planning_interface::PlanningSceneInterface planning_scene_interface;
   std::vector<double> joint_group_positions_arm;
+  geometry_msgs::msg::Pose target_pose;
   moveit::planning_interface::MoveGroupInterface::Plan my_plan_arm;
   rclcpp::TimerBase::SharedPtr timer_;
 

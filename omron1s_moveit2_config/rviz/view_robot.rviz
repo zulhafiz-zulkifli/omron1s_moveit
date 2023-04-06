@@ -1,12 +1,15 @@
 Panels:
   - Class: rviz_common/Displays
-    Help Height: 79
+    Help Height: 0
     Name: Displays
     Property Tree Widget:
       Expanded:
         - /Global Options1
+        - /MotionPlanning1
+        - /MotionPlanning1/Planning Request1
+        - /MotionPlanning1/Planning Metrics1
       Splitter Ratio: 0.4957627058029175
-    Tree Height: 70
+    Tree Height: 149
   - Class: rviz_common/Selection
     Name: Selection
   - Class: rviz_common/Tool Properties
@@ -84,6 +87,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          gripper_tip:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           link1:
             Alpha: 1
             Show Axes: false
@@ -131,7 +138,7 @@ Visualization Manager:
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
         Planning Group: omron1s_manipulator
-        Query Goal State: true
+        Query Goal State: false
         Query Start State: false
         Show Workspace: false
         Start State Alpha: 1
@@ -163,6 +170,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          gripper_tip:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           link1:
             Alpha: 1
             Show Axes: false
@@ -235,25 +246,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 6.619869709014893
+      Distance: 4.590974807739258
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.2489434778690338
-        Y: -0.013962505385279655
-        Z: 0.13800443708896637
+        X: 0.34838545322418213
+        Y: 0.059677861630916595
+        Z: 0.02596176415681839
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.28539812564849854
+      Pitch: 0.6047966480255127
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 1.270397663116455
+      Yaw: 0.260397732257843
     Saved: ~
 Window Geometry:
   Displays:
