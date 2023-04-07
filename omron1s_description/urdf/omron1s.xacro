@@ -10,16 +10,40 @@
   <!-- Used for fixing robot to Gazebo 'base_link' -->
   <link name="world"/>
 
-  <joint name="fixed" type="fixed">
+  <!-- <joint name="fixed" type="fixed">
     <parent link="world"/>
     <child link="base_link"/>
+  </joint> -->
+
+    <joint
+    name="fixed"
+    type="fixed">
+    <origin
+      xyz="-0.097 -0.037 0.0"
+      rpy="0 0 1.3326126" />
+    <parent
+      link="world" />
+    <child
+      link="base_link" />
   </joint>
+
+    <!-- <joint
+    name="fixed"
+    type="fixed">
+    <origin
+      xyz="0.059 -0.085 0.052"
+      rpy="0 0 -1.3326126" />
+    <parent
+      link="world" />
+    <child
+      link="base_link" />
+  </joint> -->
 
   <link
     name="base_link">
     <inertial>
       <origin
-        xyz="0.058756 0.1005 0.084662"
+        xyz="0 0 0"
         rpy="0 0 0" />
       <mass
         value="0.71125" />
@@ -353,21 +377,33 @@
       xyz="0 0 0" />
   </joint>
 
-  <link name="gripper_tip"/>
+  <link name="tool0"/>
   
   <joint
-    name="gripper_tip_joint"
+    name="tool0_joint"
     type="fixed">
     <origin
-      xyz="0.0 0.0 0.0"
-      rpy="0 0 0" />
+      xyz="0.0 0.19 0.0"
+      rpy="1.5708 -1.5708 0" />
     <parent
-      link="gripper" />
+      link="link4" />
     <child
-      link="gripper_tip" />
-    <axis
-      xyz="0 0 0" />
+      link="tool0" />
   </joint>
+
+  <!-- <link name="poseref"/>
+
+  <joint
+    name="poseref_joint"
+    type="fixed">
+    <origin
+      xyz="0.059 -0.085 0.052"
+      rpy="0 0 -1.3326126" />
+    <parent
+      link="base_link" />
+    <child
+      link="poseref" />
+  </joint> -->
 
 
   <!-- ROS2 CONTROL-->

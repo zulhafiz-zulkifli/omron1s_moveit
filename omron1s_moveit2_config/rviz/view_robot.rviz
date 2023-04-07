@@ -8,6 +8,8 @@ Panels:
         - /MotionPlanning1
         - /MotionPlanning1/Planning Request1
         - /MotionPlanning1/Planning Metrics1
+        - /TF1
+        - /TF1/Frames1
       Splitter Ratio: 0.4957627058029175
     Tree Height: 149
   - Class: rviz_common/Selection
@@ -87,10 +89,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_tip:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           link1:
             Alpha: 1
             Show Axes: false
@@ -111,6 +109,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          tool0:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           world:
             Alpha: 1
             Show Axes: false
@@ -138,7 +140,7 @@ Visualization Manager:
         Interactive Marker Size: 0
         Joint Violation Color: 255; 0; 255
         Planning Group: omron1s_manipulator
-        Query Goal State: true
+        Query Goal State: false
         Query Start State: false
         Show Workspace: false
         Start State Alpha: 1
@@ -170,10 +172,6 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
-          gripper_tip:
-            Alpha: 1
-            Show Axes: false
-            Show Trail: false
           link1:
             Alpha: 1
             Show Axes: false
@@ -194,6 +192,10 @@ Visualization Manager:
             Show Axes: false
             Show Trail: false
             Value: true
+          tool0:
+            Alpha: 1
+            Show Axes: false
+            Show Trail: false
           world:
             Alpha: 1
             Show Axes: false
@@ -203,6 +205,20 @@ Visualization Manager:
         Show Robot Visual: true
       Value: true
       Velocity_Scaling_Factor: 0.1
+    - Class: rviz_default_plugins/TF
+      Enabled: false
+      Frame Timeout: 15
+      Frames:
+        All Enabled: true
+      Marker Scale: 1
+      Name: TF
+      Show Arrows: true
+      Show Axes: true
+      Show Names: true
+      Tree:
+        {}
+      Update Interval: 0
+      Value: false
   Enabled: true
   Global Options:
     Background Color: 48; 48; 48
@@ -246,25 +262,25 @@ Visualization Manager:
   Views:
     Current:
       Class: rviz_default_plugins/Orbit
-      Distance: 4.590974807739258
+      Distance: 2.9217519760131836
       Enable Stereo Rendering:
         Stereo Eye Separation: 0.05999999865889549
         Stereo Focal Distance: 1
         Swap Stereo Eyes: false
         Value: false
       Focal Point:
-        X: 0.34838545322418213
-        Y: 0.059677861630916595
-        Z: 0.02596176415681839
+        X: 0.23046420514583588
+        Y: -0.056735798716545105
+        Z: 0.036724407225847244
       Focal Shape Fixed Size: true
       Focal Shape Size: 0.05000000074505806
       Invert Z Axis: false
       Name: Current View
       Near Clip Distance: 0.009999999776482582
-      Pitch: 0.6047966480255127
+      Pitch: 0.5197967290878296
       Target Frame: <Fixed Frame>
       Value: Orbit (rviz)
-      Yaw: 0.260397732257843
+      Yaw: 1.0054008960723877
     Saved: ~
 Window Geometry:
   Displays:
@@ -284,5 +300,5 @@ Window Geometry:
   Views:
     collapsed: true
   Width: 941
-  X: 333
-  Y: 96
+  X: 620
+  Y: 139

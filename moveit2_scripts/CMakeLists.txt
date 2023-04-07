@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.5)
-project(moveit2_scripts)
+project(omron1s_scripts)
 
 # Default to C99
 if(NOT CMAKE_C_STANDARD)

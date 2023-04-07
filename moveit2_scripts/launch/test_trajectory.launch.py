@@ -163,7 +163,7 @@ def generate_launch_description():
     # MoveGroupInterface demo executable
     move_group_demo = Node(
         name="test_trajectory",
-        package="moveit2_scripts",
+        package="omron1s_scripts",
         executable="test_trajectory",
         output="screen",
         parameters=[

@@ -24,10 +24,11 @@ def generate_launch_description():
         get_package_share_directory("omron1s_hwi"), "config", "controller_configuration.yaml"
     )
 
-    world_file_name = 'empty_world.world'
+    world_file_name = 'empty.world'
     world = os.path.join(
         get_package_share_directory('omron1s_hwi'), 'worlds', world_file_name
     )
+
 
     return LaunchDescription([
         # Node(
@@ -77,7 +78,7 @@ def generate_launch_description():
             name="robot_state_publisher",
             parameters=[
                 {"robot_description": robot_description_config.toxml()},
-                # {"use_sim_time": True}
+                {"use_sim_time": True}
                 ],
             output="screen"
         ),
@@ -91,10 +92,16 @@ def generate_launch_description():
                 # {"use_sim_time": True}
                 ]
         ),
-            
 
+        
+        # With Gazebo GUI
+        # ExecuteProcess(
+        #     cmd=['gazebo', '--verbose', world, '-s', 'libgazebo_ros_factory.so'], 
+        #     output='screen'),
+
+        # Without Gazebo GUI
         ExecuteProcess(
-            cmd=['gazebo', '--verbose', '-s', 'libgazebo_ros_factory.so'], 
+            cmd=['gzserver', '--verbose', world, '-s', 'libgazebo_ros_factory.so'], 
             output='screen'),
 
         ExecuteProcess(

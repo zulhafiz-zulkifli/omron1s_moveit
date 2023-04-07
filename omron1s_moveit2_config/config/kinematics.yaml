@@ -1,4 +1,9 @@
 omron1s_manipulator:
+  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
+  kinematics_solver_search_resolution: 0.005
+  kinematics_solver_timeout: 0.005
+  position_only_ik: True
+  # kinematics_solver: trac_ik_kinematics_plugin/TRAC_IKKinematicsPlugin
   # kinematics_solver: lma_kinematics_plugin/LMAKinematicsPlugin
 
   # kinematics_solver: cached_ik_kinematics_plugin/CachedKDLKinematicsPlugin
@@ -6,7 +11,6 @@ omron1s_manipulator:
   # max_cache_size: 10000
 
 
-  kinematics_solver: kdl_kinematics_plugin/KDLKinematicsPlugin
-  kinematics_solver_search_resolution: 0.005
-  kinematics_solver_timeout: 0.005
-  position_only_ik: True
+
+
+  

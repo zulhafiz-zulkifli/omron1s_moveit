@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <?xml-model href="http://download.ros.org/schema/package_format3.xsd" schematypens="http://www.w3.org/2001/XMLSchema"?>
 <package format="3">
-  <name>moveit2_scripts</name>
+  <name>omron1s_scripts</name>
   <version>0.0.0</version>
   <description>TODO: Package description</description>
   <maintainer email="zulh2605@gmail.com">px10</maintainer>
