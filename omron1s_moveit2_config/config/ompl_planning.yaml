@@ -128,8 +128,8 @@ planner_configs:
     dense_delta_fraction: 0.001  # delta fraction for interface detection. default: 0.001
     max_failures: 5000  # maximum consecutive failure limit. default: 5000
 omron1s_manipulator:
-  enforce_constrained_state_space: true
-  projection_evaluator: joints(joint1,joint2)
+  # enforce_constrained_state_space: true
+  # projection_evaluator: joints(joint1,joint2,joint3,joint4)
   # longest_valid_segment_fraction: 0.02
   # default_planner_config: RRTConnect
   planner_configs:
